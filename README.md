@@ -26,7 +26,7 @@ O projeto utiliza **Arquitetura Hexagonal** (Ports and Adapters), escolhida por 
  
 - Trocar PostgreSQL por outro banco de dados
 - Substituir AWS SQS por outro provider de mensageria (RabbitMQ, Kafka, Azure Service Bus)
-- Expor novas interfaces de entrada além da REST atual (gRPC, CLI, eventos)
+
 ### Por que não Layered Architecture?
  
 A arquitetura em camadas tradicional (Controller → Service → Repository) foi descartada porque, embora simples de começar, tende a apresentar problemas à medida que o projeto cresce:
