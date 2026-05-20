@@ -3,7 +3,6 @@ package com.fhcs.dlq.auditor.infrastructure.adapter.out.persistence.postgres.ent
 import com.fhcs.dlq.auditor.core.domain.bo.enums.Severity;
 import com.fhcs.dlq.auditor.core.domain.bo.enums.AuditStatus;
 import jakarta.persistence.*;
-import java.time.Instant;
 import java.util.UUID;
 
 @Entity
@@ -18,7 +17,7 @@ public class DlqMessageEntity {
     @Column(columnDefinition = "TEXT")
     private String payload;
 
-    private Instant timestamp;
+    private String timestamp;
 
     @Enumerated(EnumType.STRING)
     private AuditStatus status;
@@ -32,8 +31,8 @@ public class DlqMessageEntity {
     public void setQueueName(String queueName) { this.queueName = queueName; }
     public String getPayload() { return payload; }
     public void setPayload(String payload) { this.payload = payload; }
-    public Instant getTimestamp() { return timestamp; }
-    public void setTimestamp(Instant timestamp) { this.timestamp = timestamp; }
+    public String getTimestamp() { return timestamp; }
+    public void setTimestamp(String timestamp) { this.timestamp = timestamp; }
     public AuditStatus getStatus() { return status; }
     public void setStatus(AuditStatus status) { this.status = status; }
     public Severity getSeverity() { return severity; }

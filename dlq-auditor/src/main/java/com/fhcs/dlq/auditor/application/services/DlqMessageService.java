@@ -18,15 +18,15 @@ public class DlqMessageService implements DlqMessageServicePort {
     }
 
     @Override
-    public void processarMensagem(SqsOrderMessageBO bo, String queueName) {
+    public void processarMensagem(SqsOrderMessageBO bo) {
         final DlqMessageBO dlqMessageBO = new DlqMessageBO();
 
         try {
-            dlqMessageBO.inicializar(queueName, bo.toString());
+            dlqMessageBO.inicializar(bo.getOrigin(), bo.toString());
             dlqMessageBO.definirSeveridade(bo.calcularQuantidadeTotalProdutos());
 
         } catch (Exception e) {
-            dlqMessageBO.inicializar(queueName, bo.toString());
+            dlqMessageBO.inicializar(bo.getOrigin(), bo.toString());
             dlqMessageBO.definirSeveridade(0);
         }
 

@@ -22,10 +22,10 @@ public class DlqListenerAdapter {
         this.dlqMessageServicePort = dlqMessageServicePort;
     }
 
-    @SqsListener("${aws.sqs.dlq-queue-name}")
+    @SqsListener(value = "${aws.sqs.dlq-queue-name}")
     public void receberMensagem(SqsOrderMessageDTO dto) {
         SqsOrderMessageBO bo = SqsOrderMessageMapper.toBO(dto);
 
-        dlqMessageServicePort.processarMensagem(bo, QUEUE_NAME);
+        dlqMessageServicePort.processarMensagem(bo);
     }
 }

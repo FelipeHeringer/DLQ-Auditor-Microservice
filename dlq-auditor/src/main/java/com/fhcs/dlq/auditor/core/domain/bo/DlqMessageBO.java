@@ -4,7 +4,8 @@ package com.fhcs.dlq.auditor.core.domain.bo;
 import com.fhcs.dlq.auditor.core.domain.bo.enums.AuditStatus;
 import com.fhcs.dlq.auditor.core.domain.bo.enums.Severity;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 public class DlqMessageBO {
@@ -12,9 +13,11 @@ public class DlqMessageBO {
     private UUID errorId;
     private String queueName;
     private String payload;     
-    private Instant timestamp;
+    private String timestamp;
     private AuditStatus status;
     private Severity severity;
+
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public void definirSeveridade(int quantidadeTotalProdutos) {
         if (quantidadeTotalProdutos > 100) {
@@ -30,7 +33,7 @@ public class DlqMessageBO {
         this.errorId = UUID.randomUUID();
         this.queueName = queueName;
         this.payload = payload;
-        this.timestamp = Instant.now();
+        this.timestamp = LocalDateTime.now().format(formatter);;
         this.status = AuditStatus.PENDING_ANALYSIS;
     }
 
@@ -40,8 +43,8 @@ public class DlqMessageBO {
     public void setQueueName(String queueName) { this.queueName = queueName; }
     public String getPayload() { return payload; }
     public void setPayload(String payload) { this.payload = payload; }
-    public Instant getTimestamp() { return timestamp; }
-    public void setTimestamp(Instant timestamp) { this.timestamp = timestamp; }
+    public String getTimestamp() { return timestamp; }
+    public void setTimestamp(String timestamp) { this.timestamp = timestamp; }
     public AuditStatus getStatus() { return status; }
     public void setStatus(AuditStatus status) { this.status = status; }
     public Severity getSeverity() { return severity; }
