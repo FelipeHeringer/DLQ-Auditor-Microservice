@@ -24,8 +24,10 @@ public class DlqListenerAdapter {
 
     @SqsListener(value = "${aws.sqs.dlq-queue-name}")
     public void receberMensagem(SqsOrderMessageDTO dto) {
+        System.out.println("Mensagem recebida: " + dto.getCustomerId());
         SqsOrderMessageBO bo = SqsOrderMessageMapper.toBO(dto);
 
         dlqMessageServicePort.processarMensagem(bo);
+        System.out.println("Mensagem consumida: " + dto.getCustomerId());
     }
 }
